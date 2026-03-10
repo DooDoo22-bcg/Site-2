@@ -22,19 +22,19 @@
 
     <div class="game-container">
         
-        <div class="game-card" onclick="openGame('https://polytrack.io/')">
+        <div class="game-card" onclick="openGame('https://862140411-925762699313988675.preview.editmysite.com/uploads/b/139890129-216694856942690240/files/index.html')">
             <img src="polytrack-min.png" alt="PolyTrack">
             <p>PolyTrack</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://kbhgames.com/game/slope/embed')">
+        <div class="game-card" onclick="openGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://mathgames67.github.io/games/slope/')">
             <img src="slope.png" alt="Slope">
             <p>Slope</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://www.google.com/logos/2010/pacman10-i.html')">
+        <div class="game-card" onclick="openGame('https://gitbubbls.github.io/2048/')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/2048_logo.svg" alt="2048">
-            <p>Pac-Man (Safe Link)</p>
+            <p>2048</p>
         </div>
 
     </div>
@@ -43,21 +43,28 @@
         function openGame(url) {
             var win = window.open('about:blank', '_blank');
             if (!win) {
-                alert("Pop-up blocked!");
+                alert("Please allow pop-ups!");
                 return;
             }
 
-            // We use a simple iframe injection
-            var html = `
+            // Using the 'doc.write' method to break the link to your GitHub domain
+            var doc = win.document;
+            doc.open();
+            doc.write(`
                 <html>
-                <head><title>Google Classroom</title></head>
-                <body style="margin:0;padding:0;overflow:hidden;background:#000;">
-                    <iframe src="${url}" style="width:100%;height:100%;border:none;"></iframe>
+                <head>
+                    <title>Google Classroom</title>
+                    <style>
+                        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#000; }
+                        iframe { width:100%; height:100%; border:none; }
+                    </style>
+                </head>
+                <body>
+                    <iframe src="${url}"></iframe>
                 </body>
                 </html>
-            `;
-            win.document.write(html);
-            win.document.close();
+            `);
+            doc.close();
         }
     </script>
 </body>

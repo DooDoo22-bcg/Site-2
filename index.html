@@ -21,54 +21,42 @@
     <h1>Game Portal</h1>
 
     <div class="game-container">
-        <div class="game-card" onclick="openGame('https://topvaz.github.io/g/polytrack/')">
+        
+        <div class="game-card" onclick="openGame('https://862140411-925762699313988675.preview.editmysite.com/uploads/b/139890129-216694856942690240/files/index.html')">
             <img src="polytrack-min.png" alt="PolyTrack">
             <p>PolyTrack</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://topvaz.github.io/g/slope/')">
+        <div class="game-card" onclick="openGame('https://v6p9d9t4.ssl.hwcdn.net/html/1905337/index.html')">
             <img src="slope.png" alt="Slope">
             <p>Slope</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://gitbubbls.github.io/2048/')">
+        <div class="game-card" onclick="openGame('https://h5gamess.com/game/2048/index.html')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/2048_logo.svg" alt="2048">
             <p>2048</p>
         </div>
+
     </div>
 
-  <script>
-    function openGame(url) {
-        // Open the window
-        var win = window.open('about:blank', '_blank');
-        
-        if (!win) {
-            alert("Pop-up blocked! Please allow pop-ups.");
-            return;
+    <script>
+        function openGame(url) {
+            var win = window.open('about:blank', '_blank');
+            if (!win) {
+                alert("Please allow pop-ups!");
+                return;
+            }
+
+            win.document.write(`
+                <html>
+                <head><title>Loading...</title></head>
+                <body style="margin:0;padding:0;overflow:hidden;background:#000;">
+                    <iframe src="${url}" style="width:100%;height:100%;border:none;"></iframe>
+                </body>
+                </html>
+            `);
+            win.document.close();
         }
-
-        // Force the window to have no "Base URL" so it doesn't look at your GitHub
-        win.document.open();
-        
-        var html = `
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Google Classroom</title>
-                <style>
-                    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
-                    iframe { width: 100%; height: 100%; border: none; }
-                </style>
-            </head>
-            <body>
-                <iframe src="${url}" allowfullscreen></iframe>
-            </body>
-            </html>
-        `;
-
-        win.document.write(html);
-        win.document.close();
-    }
-</script>
+    </script>
 </body>
 </html>

@@ -3,68 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site 2</title>
+    <title>Def School Work</title>
     <style>
         body { background-color: #0f0f0f; color: white; font-family: sans-serif; margin: 0; padding: 20px; display: flex; flex-direction: column; align-items: center; }
         h1 { color: #00ff88; margin-bottom: 30px; }
-        .game-container { display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 20px; width: 95%; padding: 20px 10px; -webkit-overflow-scrolling: touch; }
+        .game-container { display: flex; flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 20px; width: 95%; padding: 20px 10px; }
         .game-container::-webkit-scrollbar { height: 8px; }
         .game-container::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
-        .game-card { flex: 0 0 200px; background: #1a1a1a; border: 2px solid #333; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; transition: transform 0.2s, border-color 0.2s; }
+        .game-card { flex: 0 0 200px; background: #1a1a1a; border: 2px solid #333; border-radius: 15px; padding: 15px; text-align: center; cursor: pointer; transition: 0.3s; }
         .game-card:hover { transform: translateY(-5px); border-color: #00ff88; }
         .game-card img { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; }
-        .game-card p { margin-top: 10px; font-weight: bold; font-size: 18px; }
+        .game-card p { margin-top: 10px; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <h1>Game Portal</h1>
+    <h1>Dashboard</h1>
 
     <div class="game-container">
-        
-        <div class="game-card" onclick="openGame('https://862140411-925762699313988675.preview.editmysite.com/uploads/b/139890129-216694856942690240/files/index.html')">
+        <div class="game-card" onclick="launch('aHR0cHM6Ly9wb2x5dHJhY2suaW8vZ2FtZS8=')">
             <img src="polytrack-min.png" alt="PolyTrack">
             <p>PolyTrack</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=https://mathgames67.github.io/games/slope/')">
+        <div class="game-card" onclick="launch('aHR0cHM6Ly93YXliYWNrLmdlb21ldHJ5ZGFzaC5pby9nYW1lL3Nsb3BlLw==')">
             <img src="slope.png" alt="Slope">
             <p>Slope</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://gitbubbls.github.io/2048/')">
+        <div class="game-card" onclick="launch('aHR0cHM6Ly9naXRidWJibHMuZ2l0aHViLmlvLzIwNDgv')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/2048_logo.svg" alt="2048">
             <p>2048</p>
         </div>
-
     </div>
 
     <script>
-        function openGame(url) {
+        function launch(encodedUrl) {
+            // Decodes the URL only when clicked
+            var url = atob(encodedUrl);
+            
             var win = window.open('about:blank', '_blank');
             if (!win) {
-                alert("Please allow pop-ups!");
+                alert("Pop-up blocked! Allow pop-ups in your browser settings.");
                 return;
             }
 
-            // Using the 'doc.write' method to break the link to your GitHub domain
-            var doc = win.document;
-            doc.open();
-            doc.write(`
+            win.document.write(`
                 <html>
                 <head>
-                    <title>Google Classroom</title>
+                    <title>Google Drive</title>
                     <style>
-                        body, html { margin:0; padding:0; height:100%; overflow:hidden; background:#000; }
-                        iframe { width:100%; height:100%; border:none; }
+                        body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+                        iframe { width: 100%; height: 100%; border: none; }
                     </style>
                 </head>
                 <body>
-                    <iframe src="${url}"></iframe>
+                    <iframe src="${url}" allowfullscreen="true"></iframe>
                 </body>
                 </html>
             `);
-            doc.close();
+            win.document.close();
         }
     </script>
 </body>

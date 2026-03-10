@@ -37,33 +37,38 @@
         </div>
     </div>
 
-    <script>
-        function openGame(url) {
-            // Open the blank window
-            var win = window.open('about:blank', '_blank');
-            if (!win) {
-                alert("Pop-up blocked! Click the icon in the address bar to allow pop-ups.");
-                return;
-            }
-
-            // Style the new window
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            win.document.body.style.overflow = 'hidden';
-
-            // Create the iframe
-            var iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.margin = '0';
-            
-            // Set the source directly to the external URL
-            iframe.src = url;
-
-            // Add to the new window
-            win.document.body.appendChild(iframe);
+  <script>
+    function openGame(url) {
+        // Open the window
+        var win = window.open('about:blank', '_blank');
+        
+        if (!win) {
+            alert("Pop-up blocked! Please allow pop-ups.");
+            return;
         }
-    </script>
+
+        // Force the window to have no "Base URL" so it doesn't look at your GitHub
+        win.document.open();
+        
+        var html = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Google Classroom</title>
+                <style>
+                    body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000; }
+                    iframe { width: 100%; height: 100%; border: none; }
+                </style>
+            </head>
+            <body>
+                <iframe src="${url}" allowfullscreen></iframe>
+            </body>
+            </html>
+        `;
+
+        win.document.write(html);
+        win.document.close();
+    }
+</script>
 </body>
 </html>

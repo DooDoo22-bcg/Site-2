@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site 2</title>
     <style>
-        /* Base Styles */
         body {
             background-color: #0f0f0f;
             color: white;
@@ -17,36 +16,24 @@
             align-items: center;
         }
 
-        h1 {
-            color: #00ff88;
-            margin-bottom: 30px;
-        }
+        h1 { color: #00ff88; margin-bottom: 30px; }
 
-        /* Horizontal Row Setup */
         .game-container {
             display: flex;
             flex-direction: row;
-            flex-wrap: nowrap; /* Keeps them in one single line */
-            overflow-x: auto;   /* Allows side-to-side scrolling */
+            flex-wrap: nowrap;
+            overflow-x: auto;
             gap: 20px;
             width: 95%;
             padding: 20px 10px;
-            /* Smooth scrolling for touchscreens/trackpads */
             -webkit-overflow-scrolling: touch;
         }
 
-        /* Custom Scrollbar (so it looks good on dark mode) */
-        .game-container::-webkit-scrollbar {
-            height: 8px;
-        }
-        .game-container::-webkit-scrollbar-thumb {
-            background: #444;
-            border-radius: 10px;
-        }
+        .game-container::-webkit-scrollbar { height: 8px; }
+        .game-container::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
 
-        /* Game Card Styles */
         .game-card {
-            flex: 0 0 200px; /* Each card is exactly 200px wide */
+            flex: 0 0 200px;
             background: #1a1a1a;
             border: 2px solid #333;
             border-radius: 15px;
@@ -56,10 +43,7 @@
             transition: transform 0.2s, border-color 0.2s;
         }
 
-        .game-card:hover {
-            transform: translateY(-5px);
-            border-color: #00ff88;
-        }
+        .game-card:hover { transform: translateY(-5px); border-color: #00ff88; }
 
         .game-card img {
             width: 100%;
@@ -68,11 +52,7 @@
             border-radius: 10px;
         }
 
-        .game-card p {
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 18px;
-        }
+        .game-card p { margin-top: 10px; font-weight: bold; font-size: 18px; }
     </style>
 </head>
 <body>
@@ -81,43 +61,41 @@
 
     <div class="game-container">
         
-       <div class="game-card" onclick="openGame('https://topvaz.github.io/g/polytrack/')">
+        <div class="game-card" onclick="openGame('https://topvaz.github.io/g/polytrack/')">
             <img src="polytrack-min.png" alt="PolyTrack">
             <p>PolyTrack</p>
         </div>
 
-      <div class="game-card" onclick="openGame('https://topvaz.github.io/g/slope/')">
+        <div class="game-card" onclick="openGame('https://topvaz.github.io/g/slope/')">
             <img src="slope.png" alt="Slope">
             <p>Slope</p>
         </div>
 
         <div class="game-card" onclick="openGame('https://gitbubbls.github.io/2048/')">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/2048_logo.svg" alt="2048">
-    <p>2048</p>
-</div>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/2048_logo.svg" alt="2048">
+            <p>2048</p>
+        </div>
+
     </div>
 
-   <script>
+    <script>
         function openGame(url) {
-            var win = window.open();
+            var win = window.open('about:blank', '_blank');
             if (!win) {
-                alert("Please allow pop-ups for this site!");
+                alert("Pop-up blocked! Please click the 'pop-up' icon in your search bar and select 'Always allow'.");
                 return;
             }
-            
-            // This line wraps the URL in a Google proxy to help bypass filters
-            var proxiedUrl = "https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=" + encodeURIComponent(url);
-            
+
             win.document.body.style.margin = '0';
             win.document.body.style.height = '100vh';
+            
             var iframe = win.document.createElement('iframe');
             iframe.style.border = 'none';
             iframe.style.width = '100%';
             iframe.style.height = '100%';
-            
-            // This tells the iframe to load the "disguised" Google link
-            iframe.src = proxiedUrl;
-            
+            iframe.style.margin = '0';
+            iframe.src = url;
+
             win.document.body.appendChild(iframe);
         }
     </script>

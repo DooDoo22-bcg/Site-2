@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Classroom</title> <style>
-        /* CSS: Makes the site look like a pro game hub */
+    <title>Google Classroom</title>
+    <style>
         body {
             background-color: #0f0f0f;
             color: white;
@@ -18,15 +18,23 @@
 
         h1 { margin-top: 50px; color: #00ff88; text-shadow: 0 0 10px #00ff88; }
 
+        /* THE FIX: Changed to flex and added scrolling */
         .game-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            display: flex;
+            flex-direction: row; /* Forces them into a row */
+            overflow-x: auto;    /* Adds a scrollbar if there are too many games */
+            padding: 20px;
             gap: 25px;
-            width: 80%;
-            margin-top: 40px;
+            width: 90%;
+            justify-content: flex-start; /* Aligns them to the left */
         }
 
+        /* Styling for the scrollbar to keep it dark */
+        .game-container::-webkit-scrollbar { height: 8px; }
+        .game-container::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
         .game-card {
+            flex: 0 0 200px; /* Keeps each card at exactly 200px wide */
             background: #1a1a1a;
             border: 1px solid #333;
             border-radius: 12px;
@@ -43,8 +51,9 @@
         }
 
         .game-card img {
-            width: 80px;
-            height: 80px;
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
             border-radius: 10px;
             margin-bottom: 10px;
         }
@@ -55,51 +64,7 @@
 <body>
 
     <h1>Game Portal</h1>
-    <p>Select a game to open in an about:blank tab.</p>
-
-   <div class="game-card" onclick="openGame('https://html-classic.itch.zone/html/15451330/index.html')">
-    <img src="polytrack-min.png" alt="PolyTrack">
-    <p>PolyTrack</p>
-</div>
-
-    <div class="game-card" onclick="openGame('https://topvaz.github.io/g/slope/')">
-    <img src="slope.png" alt="Slope">
-    <p>Slope (Mirror 1)</p>
-</div>
     
-    <div class="game-card" onclick="openGame('https://hextris.io/')">
-    <img src="hextris.png" alt="Hextris">
-    <p>Hextris</p>
-</div>
-
-    <script>
-        // JAVASCRIPT: The About:Blank Logic
-        function openGame(url) {
-            var win = window.open();
-            if (!win) {
-                alert("Pop-up blocked! Please allow pop-ups for this site to work.");
-                return;
-            }
-            
-            win.document.body.style.margin = '0';
-            win.document.body.style.height = '100vh';
-            
-            var iframe = win.document.createElement('iframe');
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.margin = '0';
-            iframe.src = url;
-            
-            win.document.body.appendChild(iframe);
-        }
-
-        // PANIC BUTTON: Press 'Escape' to go to Google
-        window.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                window.location.replace('https://google.com');
-            }
-        });
-    </script>
-</body>
-</html>
+    <div class="game-container">
+        <div class="game-card" onclick="openGame('https://topvaz.github.io/g/polytrack/')">
+            <img src="

@@ -22,19 +22,19 @@
 
     <div class="game-container">
         
-        <div class="game-card" onclick="openGame('https://862140411-925762699313988675.preview.editmysite.com/uploads/b/139890129-216694856942690240/files/index.html')">
+        <div class="game-card" onclick="openGame('https://polytrack.io/')">
             <img src="polytrack-min.png" alt="PolyTrack">
             <p>PolyTrack</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://v6p9d9t4.ssl.hwcdn.net/html/1905337/index.html')">
+        <div class="game-card" onclick="openGame('https://kbhgames.com/game/slope/embed')">
             <img src="slope.png" alt="Slope">
             <p>Slope</p>
         </div>
 
-        <div class="game-card" onclick="openGame('https://h5gamess.com/game/2048/index.html')">
+        <div class="game-card" onclick="openGame('https://www.google.com/logos/2010/pacman10-i.html')">
             <img src="https://upload.wikimedia.org/wikipedia/commons/1/18/2048_logo.svg" alt="2048">
-            <p>2048</p>
+            <p>Pac-Man (Safe Link)</p>
         </div>
 
     </div>
@@ -43,18 +43,20 @@
         function openGame(url) {
             var win = window.open('about:blank', '_blank');
             if (!win) {
-                alert("Please allow pop-ups!");
+                alert("Pop-up blocked!");
                 return;
             }
 
-            win.document.write(`
+            // We use a simple iframe injection
+            var html = `
                 <html>
-                <head><title>Loading...</title></head>
+                <head><title>Google Classroom</title></head>
                 <body style="margin:0;padding:0;overflow:hidden;background:#000;">
                     <iframe src="${url}" style="width:100%;height:100%;border:none;"></iframe>
                 </body>
                 </html>
-            `);
+            `;
+            win.document.write(html);
             win.document.close();
         }
     </script>

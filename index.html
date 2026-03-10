@@ -97,20 +97,27 @@
 </div>
     </div>
 
-    <script>
+   <script>
         function openGame(url) {
             var win = window.open();
             if (!win) {
                 alert("Please allow pop-ups for this site!");
                 return;
             }
+            
+            // This line wraps the URL in a Google proxy to help bypass filters
+            var proxiedUrl = "https://images-opensocial.googleusercontent.com/gadgets/proxy?container=fb&url=" + encodeURIComponent(url);
+            
             win.document.body.style.margin = '0';
             win.document.body.style.height = '100vh';
             var iframe = win.document.createElement('iframe');
             iframe.style.border = 'none';
             iframe.style.width = '100%';
             iframe.style.height = '100%';
-            iframe.src = url;
+            
+            // This tells the iframe to load the "disguised" Google link
+            iframe.src = proxiedUrl;
+            
             win.document.body.appendChild(iframe);
         }
     </script>
